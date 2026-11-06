@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ДЭШБОРДЫЧЬ</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+  <!-- ======= ТЁМНЫЙ САЙДБАР С ИКОНКАМИ ======= -->
+  <aside class="sidebar">
+    <div class="avatar">Д</div>
+    <nav class="side-nav">
+      <button class="nav-ico active" data-view="today" data-tip="Главная">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      </button>
+      <button class="nav-ico" data-view="calendar" data-tip="Календарь">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </button>
+      <button class="nav-ico" data-view="habits" data-tip="Привычки">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </button>
+      <button class="nav-ico" data-view="tasks" data-tip="Задачи">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+      </button>
+      <button class="nav-ico" data-view="mail" data-tip="Почта">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      </button>
+      <button class="nav-ico" data-view="payments" data-tip="Платежи">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+      </button>
+      <button class="nav-ico" data-view="finance" data-tip="Финансы">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      </button>
+      <button class="nav-ico" data-view="docs" data-tip="Документы">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      </button>
+      <button class="nav-ico" data-view="ask" data-tip="Спросить">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </button>
+      <button class="nav-ico" data-view="settings" data-tip="Настройки">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+      </button>
+    </nav>
+    <div class="side-quote" id="side-quote" title="…">❝</div>
+  </aside>
+
+  <!-- ======= КОНТЕНТ ======= -->
+  <main class="main">
+
+    <!-- Топбар -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="brand">ДЭШБОРДЫЧЬ</div>
+        <div class="today-date" id="today-date"></div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" id="global-search" placeholder="Поиск...">
+        </div>
+        <button class="icon-btn" id="bell-btn" title="Непрочитанные письма">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <span class="bell-badge" id="bell-badge"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============ ГЛАВНАЯ ============ -->
+    <section id="view-today" class="view active">
+      <div class="greeting-row">
+        <div class="greeting-text">
+          <h1 id="greeting-title">Доброе утро! ☀️</h1>
+          <div class="greeting-sub" id="greeting-sub">Отличный день, чтобы делать важные дела</div>
+        </div>
+        <div class="weather-card" id="w-weather-top">
+          <span class="weather-icon">🌤</span>
+          <span class="weather-text" id="weather-short">загрузка…</span>
+        </div>
+      </div>
+
+      <!-- Умный захват: нейросеть понимает смысл и раскладывает по категориям -->
+      <div class="capture-wrap">
+        <div class="capture-bar">
+          <span class="capture-ico">✨</span>
+          <input type="text" id="capture-input" autocomplete="off"
+                 placeholder="Напиши что угодно — задачу, фильм, покупку, идею, платёж или вопрос. Пойму смысл и разложу по полочкам…">
+          <button type="button" class="mic-btn" id="capture-mic" title="Голосовой ввод">🎤</button>
+          <button class="btn" id="capture-send">Понять</button>
+        </div>
+        <div id="capture-result" class="capture-result"></div>
+      </div>
+
+      <div class="widgets-grid">
+        <!-- Ряд 1: Сегодня в календаре | Задачи на завтра -->
+        <div class="card widget">
+          <div class="w-head">
+            <span class="w-ico blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </span>
+            <h3>Сегодня в календаре</h3>
+            <button class="w-link" data-goto="calendar">Открыть ➔</button>
+          </div>
+          <div class="w-body" id="w-calendar"><div class="muted">загрузка…</div></div>
+        </div>
+
+        <div class="card widget">
+          <div class="w-head">
+            <span class="w-ico green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            </span>
+            <h3>Задачи на завтра</h3>
+            <button class="w-link" data-goto="tasks">Все задачи ➔</button>
+          </div>
+          <div class="w-body" id="w-tasks-tomorrow"><div class="muted">загрузка…</div></div>
+        </div>
+
+        <!-- Ряд 2: Ближайшие платежи | Мои приоритеты -->
+        <div class="card widget">
+          <div class="w-head">
+            <span class="w-ico amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+            </span>
+            <h3>Ближайшие платежи</h3>
+            <button class="w-link" data-goto="payments">Все платежи ➔</button>
+          </div>
+          <div class="w-body" id="w-pay"><div class="muted">загрузка…</div></div>
+        </div>
+
+        <div class="card widget">
+          <div class="w-head">
+            <span class="w-ico indigo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <h3>Мои приоритеты</h3>
+            <button class="w-link" id="prio-add-btn">+ Добавить</button>
+          </div>
+          <form id="prio-form" class="prio-form hidden">
+            <input type="text" id="prio-input" placeholder="Новая приоритетная задача…" maxlength="200">
+          </form>
+          <div class="w-body" id="w-prio"><div class="muted">загрузка…</div></div>
+        </div>
+
+        <!-- Ряд 3: Напоминания о платежах | Непрочитанные письма -->
+        <div class="card widget">
+          <div class="w-head">
+            <span class="w-ico red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+            </span>
+            <h3>Напоминания о платежах</h3>
+          </div>
+          <div class="w-body" id="w-reminders"><div class="muted">загрузка…</div></div>
+        </div>
+
+        <div class="card widget">
+          <div class="w-head">
+            <span class="w-ico red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </span>
+            <h3>Непрочитанные письма</h3>
+          </div>
+          <div class="w-body" id="w-mail"><div class="muted">загрузка…</div></div>
+          <button class="w-footer" id="mail-all-btn">Показать все письма <span id="mail-all-count"></span> ›</button>
+        </div>
+
+        <!-- Ряд 4: Расписание (на всю ширину) -->
+        <div class="card widget wide">
+          <div class="w-head">
+            <span class="w-ico green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </span>
+            <h3>Моё расписание</h3>
+          </div>
+          <div class="w-body" id="w-schedule"></div>
+        </div>
+
+        <!-- Подключённые сервисы -->
+        <div class="card widget wide">
+          <div class="w-head">
+            <span class="w-ico indigo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+            </span>
+            <h3>Подключённые сервисы</h3>
+            <button class="w-link" data-goto="settings">+ Добавить сервис</button>
+          </div>
+          <div class="w-body services-row" id="w-services"><div class="muted">загрузка…</div></div>
+        </div>
+
+        <!-- Брифинг -->
+        <div class="card widget wide">
+          <div class="w-head">
+            <span class="w-ico sun">☀️</span>
+            <h3>Утренний брифинг</h3>
+            <button class="w-link" id="btn-sync" title="Обновить почту и календари">🔄 Синхронизировать</button>
+            <button class="w-link accent" id="btn-send-briefing">Прислать в Telegram ➔</button>
+          </div>
+          <div class="w-body" id="w-brief"><div class="muted">загрузка…</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ КАЛЕНДАРЬ ============ -->
+    <section id="view-calendar" class="view">
+      <div class="cal-nav">
+        <button class="btn ghost" id="cal-prev">← Назад</button>
+        <h1 class="view-title" id="cal-date-title" style="margin:0;text-align:center">📅 Календарь</h1>
+        <button class="btn ghost" id="cal-next">Вперёд →</button>
+      </div>
+      <div class="toolbar" style="justify-content:center">
+        <button class="btn" id="cal-today-btn">Сегодня</button>
+        <button class="btn ghost" id="cal-add-event">+ Добавить событие</button>
+      </div>
+      <form id="cal-event-form" class="inline-form card hidden">
+        <input type="text" id="cal-event-title" placeholder="Название события…" required>
+        <input type="time" id="cal-event-time">
+        <input type="text" id="cal-event-location" placeholder="Место (необязательно)">
+        <button class="btn" type="submit">Сохранить</button>
+      </form>
+      <div id="calendar-list" class="agenda card"><div class="muted">загрузка…</div></div>
+    </section>
+
+    <!-- ============ ПРИВЫЧКИ (Way of Life) ============ -->
+    <section id="view-habits" class="view">
+      <div class="habits-header">
+        <h1 class="view-title">🎯 Трекер привычек</h1>
+        <div class="habits-score" id="habits-score"></div>
+      </div>
+      <form id="habit-form" class="inline-form card">
+        <input type="text" id="habit-name" placeholder="Новая привычка…" required maxlength="120">
+        <select id="habit-type">
+          <option value="good">✅ Хорошая</option>
+          <option value="bad">❌ Плохая</option>
+        </select>
+        <input type="text" id="habit-emoji" value="⭐" style="width:50px;text-align:center" maxlength="4">
+        <button class="btn" type="submit">Добавить</button>
+      </form>
+      <div id="habits-grid" class="habits-grid"><div class="muted">загрузка…</div></div>
+    </section>
+
+    <!-- ============ ПОЧТА ============ -->
+    <section id="view-mail" class="view">
+      <h1 class="view-title">📬 Почта</h1>
+      <div class="toolbar">
+        <label class="chk"><input type="checkbox" id="mail-unread-only"> только непрочитанные</label>
+      </div>
+      <div id="mail-list" class="mail-list card"><div class="muted">загрузка…</div></div>
+    </section>
+
+    <!-- ============ ЗАДАЧИ ============ -->
+    <section id="view-tasks" class="view">
+      <h1 class="view-title">✅ Задачи</h1>
+      <form id="task-form" class="inline-form card">
+        <input type="text" id="task-title" placeholder="Новая задача…" required>
+        <input type="date" id="task-due">
+        <select id="task-category">
+          <option value="inbox">📥 входящие</option>
+          <option value="work">💼 работа</option>
+          <option value="health">💊 здоровье</option>
+          <option value="nastya">🎀 Настюша</option>
+          <option value="shopping">🛒 покупки</option>
+          <option value="movies">🎬 фильмы и сериалы</option>
+          <option value="games">🎮 игры</option>
+          <option value="ideas">💡 идеи</option>
+          <option value="notes">📝 заметки</option>
+        </select>
+        <button class="btn" type="submit">Добавить</button>
+      </form>
+      <div id="task-list" class="checklist"><div class="muted">загрузка…</div></div>
+    </section>
+
+    <!-- ============ ПЛАТЕЖИ ============ -->
+    <section id="view-payments" class="view">
+      <h1 class="view-title">💳 Платежи и обязательства</h1>
+      <form id="obl-form" class="inline-form card wrap">
+        <input type="text" id="obl-title" placeholder="Например: Электроэнергия" required>
+        <select id="obl-kind">
+          <option value="once">разово</option>
+          <option value="monthly">ежемесячно</option>
+          <option value="yearly">ежегодно</option>
+        </select>
+        <input type="date" id="obl-due" title="Дата (для разовых)">
+        <input type="number" id="obl-day" min="1" max="31" placeholder="число месяца" title="Число месяца (для ежемесячных)">
+        <input type="number" id="obl-amount" step="0.01" placeholder="сумма">
+        <button class="btn" type="submit">Добавить</button>
+      </form>
+      <div id="monthly-total-banner" class="card monthly-total">
+        <div class="mt-left">
+          <div class="mt-label">💰 Общая сумма обязательных платежей в месяц</div>
+          <div class="mt-sub">ежемесячные + 1/12 годовых платежей</div>
+        </div>
+        <div class="mt-amount" id="monthly-total-amount">— ₽</div>
+      </div>
+      <h3 class="sub-title">Все обязательства</h3>
+      <div id="obl-all" class="checklist"><div class="muted"></div></div>
+    </section>
+
+    <!-- ============ ДОКУМЕНТЫ ============ -->
+    <section id="view-docs" class="view">
+      <h1 class="view-title">📄 Документы «второго мозга»</h1>
+      <div class="toolbar">
+        <label class="btn file-btn">📥 Загрузить файл
+          <input type="file" id="doc-file" accept=".pdf,.docx,.txt,.md,.html,.htm" hidden>
+        </label>
+        <input type="search" id="doc-search" class="card-input" placeholder="Поиск по содержимому…">
+      </div>
+      <div id="doc-status" class="muted"></div>
+      <div id="doc-search-results"></div>
+      <div id="doc-list" class="doc-list"><div class="muted">загрузка…</div></div>
+    </section>
+
+    <!-- ============ СПРОСИТЬ ============ -->
+    <section id="view-ask" class="view">
+      <h1 class="view-title">❓ Спросить «второй мозг»</h1>
+      <div id="ask-log" class="ask-log"></div>
+      <form id="ask-form" class="inline-form card">
+        <input type="text" id="ask-question" placeholder="Например: когда платить за свет? до какого числа действует страховка?" required>
+        <button class="btn" type="submit">Спросить</button>
+      </form>
+      <div class="muted hint">Тот же чат доступен в Telegram — просто напиши вопрос боту @dashboardich_bot.</div>
+    </section>
+
+    <!-- ============ НАСТРОЙКИ ============ -->
+    <section id="view-settings" class="view">
+      <h1 class="view-title">⚙️ Подключения и статус</h1>
+      <div id="status-box" class="widgets-grid"><div class="muted">загрузка…</div></div>
+      <div class="card wide setup-guide">
+        <h3>Как подключить сервисы</h3>
+        <p>Все настройки — в файле <code>.env</code> в папке проекта <code>life-hub</code>. После изменений перезапусти <code>py run.py</code>.</p>
+        <ul>
+          <li><b>Telegram-бот:</b> <code>BOT_TOKEN</code> от @BotFather; владелец запоминается автоматически при /start.</li>
+          <li><b>Яндекс (почта + календарь):</b> включи IMAP в настройках Яндекс Почты, создай пароли приложений → <code>YANDEX_LOGIN</code>, <code>YANDEX_MAIL_PASSWORD</code>, <code>YANDEX_CALDAV_PASSWORD</code>, <code>YANDEX_ENABLED=true</code>.</li>
+          <li><b>Google (Gmail + Calendar):</b> двухэтапная аутентификация + пароль приложения (myaccount.google.com/apppasswords), включи IMAP в Gmail → <code>GOOGLE_EMAIL</code>, <code>GOOGLE_MAIL_PASSWORD</code>, <code>GOOGLE_CALDAV_PASSWORD</code>, <code>GOOGLE_ENABLED=true</code>.</li>
+          <li><b>Нейросеть:</b> API-ключ OpenAI-совместимого сервиса → <code>LLM_API_KEY</code>, <code>LLM_BASE_URL</code>, <code>LLM_MODEL</code>.</li>
+          <li><b>Брифинг:</b> <code>BRIEFING_TIME=06:00</code> — во сколько присылать; <code>WEATHER_CITY</code> — город для погоды.</li>
+          <li><b>💳 Расходы из Сбербанка:</b> включи email-уведомления об операциях в СберБанк Онлайн → дашборд автоматически парсит письма и учитывает расходы. Или загрузи CSV-выписку на вкладке «Финансы».</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ ФИНАНСЫ ============ -->
+    <section id="view-finance" class="view">
+      <h1 class="view-title">📊 Финансы и расходы</h1>
+
+      <div class="toolbar">
+        <label class="btn file-btn">📥 Загрузить выписку CSV
+          <input type="file" id="csv-file" accept=".csv,.txt" hidden>
+        </label>
+        <button class="btn ghost" id="scan-bank-mails">🔍 Сканировать почту на расходы</button>
+        <span id="finance-status" class="muted"></span>
+      </div>
+
+      <div class="widgets-grid">
+        <div class="card widget wide">
+          <div class="w-head">
+            <span class="w-ico indigo">💰</span>
+            <h3>Общая статистика</h3>
+          </div>
+          <div class="w-body" id="fin-total"><div class="muted">загрузка…</div></div>
+        </div>
+
+        <div class="card widget">
+          <div class="w-head">
+            <span class="w-ico blue">📈</span>
+            <h3>Расходы по месяцам</h3>
+          </div>
+          <div class="w-body" id="fin-monthly"><div class="muted">загрузка…</div></div>
+        </div>
+
+        <div class="card widget">
+          <div class="w-head">
+            <span class="w-ico green">🏷️</span>
+            <h3>По категориям</h3>
+          </div>
+          <div class="w-body" id="fin-categories"><div class="muted">загрузка…</div></div>
+        </div>
+
+        <div class="card widget wide">
+          <div class="w-head">
+            <span class="w-ico amber">🔝</span>
+            <h3>Крупные расходы</h3>
+          </div>
+          <div class="w-body" id="fin-top"><div class="muted">загрузка…</div></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Модальное окно для чтения писем -->
+  <div class="modal-overlay" id="mail-modal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="modal-subject">Тема письма</h3>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+      <div class="modal-meta" id="modal-meta"></div>
+      <div class="modal-body" id="modal-body">Загрузка…</div>
+      <div style="padding:0 22px 18px;display:flex;gap:8px">
+        <button class="mini danger" id="modal-block-sender">🚫 Скрыть все от этого отправителя</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js?v=13"></script>
+</body>
+</html>
